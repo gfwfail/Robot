@@ -1,0 +1,16 @@
+{
+  "name": "luye/robot-simulator",
+  "type": "project",
+  "authors": [
+    {
+      "name": "Lu Ye",
+      "email": "i@gfw.fail"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Robot\\": "robot/"
+    }
+  },
+  "require": {}
+}
