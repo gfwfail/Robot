@@ -12,19 +12,22 @@
 |
 */
 
-use Robot\Table;
+use Robot\Executor;
 
 require __DIR__ . '/vendor/autoload.php';
 
-$table = new Table(4, 4);
-$executor = new Executor($table);
+$executor = new Executor();
 
 // Infinite command line.
 while (true) {
-    $line = readline("Command: ");
+    $line = readline("\033[30mCommand: ");
     readline_add_history($line);
+    try {
+        $executor->parse($line);
+    } catch (Exception $e) {
+        printf("\033[31mError: %s\n", $e->getMessage());
+    }
     if ($line === 'QUIT') {
         exit("Thanks, Bye \n");
     }
-    echo $line;
 }

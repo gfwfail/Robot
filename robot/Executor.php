@@ -6,6 +6,8 @@
 
 namespace Robot;
 
+use Exception;
+
 
 /**
  * Class Executor
@@ -13,19 +15,59 @@ namespace Robot;
  */
 class Executor
 {
-    /**
-     * @var Table
-     */
-    private $table;
 
     /**
-     * Executor constructor.
-     * @param $table
+     * Valid Commands
      */
-    public function __construct(Table $table)
+    const COMMAND_PLACE = 'PLACE';
+    const COMMAND_MOVE = 'MOVE';
+    const COMMAND_LEFT = 'LEFT';
+    const COMMAND_RIGHT = 'RIGHT';
+    const COMMAND_REPORT = 'REPORT';
+
+    /**
+     * @var Robot
+     */
+    private $robot;
+
+    public function parse(string $command): void
     {
-        $this->table = $table;
+        $args = preg_split("/\s+/", $command);
+        switch ($args[0]) {
+            case static::COMMAND_PLACE:
+                $pos = explode(',', $args[1]);
+
+                if (count($pos) < 3) {
+                    throw new Exception("Invalid arguments");
+                }
+
+                $x = intval($pos[0]);
+                $y = intval($pos[1]);
+                $direction = $pos[2];
+
+                $this->place(new Robot(new Position($x, $y, $direction)));
+                break;
+            case static::COMMAND_MOVE:
+                $this->robot->moveNext();
+                break;
+            case static::COMMAND_LEFT:
+                $this->robot->rotate('LEFT');
+                break;
+            case static::COMMAND_RIGHT:
+                $this->robot->rotate('RIGHT');
+                break;
+            case static::COMMAND_REPORT:
+                echo 'REPORT: ' . $this->robot->report() . "\n";
+                break;
+            default:
+                throw new Exception("Invalid Command");
+                break;
+        }
     }
 
+    public function place(Robot $robot): void
+    {
+        $this->robot = $robot;
+    }
 
 }
