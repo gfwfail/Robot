@@ -48,16 +48,24 @@ class Executor
                 $this->place(new Robot(new Position($x, $y, $direction)));
                 break;
             case static::COMMAND_MOVE:
-                $this->robot->moveNext();
+                if ($this->robot) {
+                    $this->robot->moveNext();
+                }
                 break;
             case static::COMMAND_LEFT:
-                $this->robot->rotate('LEFT');
+                if ($this->robot) {
+                    $this->robot->rotate('LEFT');
+                }
                 break;
             case static::COMMAND_RIGHT:
-                $this->robot->rotate('RIGHT');
+                if ($this->robot) {
+                    $this->robot->rotate('RIGHT');
+                }
                 break;
             case static::COMMAND_REPORT:
-                echo 'REPORT: ' . $this->robot->report() . "\n";
+                if ($this->robot) {
+                    echo 'REPORT: ' . $this->robot->report() . "\n";
+                }
                 break;
             default:
                 throw new Exception("Invalid Command");
