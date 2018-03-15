@@ -64,7 +64,6 @@ class Robot
         $delta = $direction == 'LEFT' ? -1 : 1;
         $directionIndex = array_search($this->getPosition()->getDirection(), $directions);
         $newDirection = $directions[($directionIndex + $delta) < 0 ? 3 : $directionIndex + $delta % 4];
-
         $this->getPosition()->setDirection($newDirection);
     }
 

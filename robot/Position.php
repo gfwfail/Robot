@@ -89,7 +89,7 @@ class Position
         return $this->y;
     }
 
-    public function move()
+    public function move(): void
     {
         switch ($this->direction) {
             case static::DIRECTION_NORTH:
@@ -112,9 +112,9 @@ class Position
         if (!$this->isMoveable($x, $y)) {
             return;
         }
+
         $this->x = $this->x + $x;
         $this->y = $this->y + $y;
-        return;
     }
 
     private function isMoveable(int $x, int $y): bool
