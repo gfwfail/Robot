@@ -2,8 +2,14 @@
 
 Usage:
 ```
-composer dump
+composer install
 php index.php
+```
+
+Test:
+```
+composer install
+composer test
 ```
 Required PHP 7.1+
 

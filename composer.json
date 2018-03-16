@@ -12,5 +12,16 @@
       "Robot\\": "robot/"
     }
   },
-  "require": {}
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "require": {},
+  "require-dev": {
+    "phpunit/phpunit": "^7.0"
+  },
+  "scripts": {
+    "test": "vendor/bin/phpunit"
+  }
 }
